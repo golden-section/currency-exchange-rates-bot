@@ -26,14 +26,17 @@ class TelegramBot extends TelegramLongPollingBot {
         if (update.hasMessage()) {
             if (update.getMessage().hasText()) {
                 if (message.getText().equals("/start")) {
-                    executeMessage(botCommands.sendMenu(chatId));
+                    executeMessage(botCommands.sendStartMenu(chatId));
+                } else if (message.getText().equals("/info")) {
+                    executeMessage(botCommands.sendInfo(chatId));
+                } else if (message.getText().equals("/settings")) {
+                    executeMessage(botCommands.sendSettings(chatId));
                 }
             }
         } else if (update.hasCallbackQuery()) {
             System.out.println("Pressed");
         }
     }
-
 
     void executeMessage(SendMessage message) {
         try {
