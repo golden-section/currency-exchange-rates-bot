@@ -7,7 +7,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 class TelegramBot extends TelegramLongPollingBot {
-
     TelegramBot() {
         super(BotTokenGetter.getToken());
     }
@@ -20,21 +19,32 @@ class TelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         BotCommands botCommands = new BotCommands();
-        long chatId = update.getMessage().getChatId();
         Message message = update.getMessage();
 
-        if (update.hasMessage()) {
-            if (update.getMessage().hasText()) {
-                if (message.getText().equals("/start")) {
-                    executeMessage(botCommands.sendStartMenu(chatId));
-                } else if (message.getText().equals("/info")) {
-                    executeMessage(botCommands.sendInfo(chatId));
-                } else if (message.getText().equals("/settings")) {
-                    executeMessage(botCommands.sendSettings(chatId));
-                }
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            long chatId = update.getMessage().getChatId();
+            if (message.getText().equals("/start")) {
+                executeMessage(botCommands.sendStartMenu(chatId));
             }
         } else if (update.hasCallbackQuery()) {
-            System.out.println("Pressed");
+            long chatId = update.getCallbackQuery().getMessage().getChatId();
+            Buttons callbackData = Buttons.valueOf(update.getCallbackQuery().getData().toUpperCase());
+
+            switch(callbackData) {
+                case BUTTON_INFO -> executeMessage(botCommands.sendInfo(chatId));
+
+                case BUTTON_SETTINGS -> executeMessage(botCommands.sendSettings(chatId));
+
+                case BUTTON_CURRENCY_REFACTOR -> executeMessage(botCommands.refactorCurrency());
+
+                case BUTTON_BANK_CHOOSER -> executeMessage(botCommands.chooseBank());
+
+                case BUTTON_CURRENCY_CHECKER -> executeMessage(botCommands.currencyChecker());
+
+                case BUTTON_ALERT_TIME -> executeMessage(botCommands.timeAlert());
+
+                default -> System.out.println("Unknown command");
+            }
         }
     }
 
@@ -45,6 +55,5 @@ class TelegramBot extends TelegramLongPollingBot {
             throw new RuntimeException(e);
         }
     }
-
 }
 

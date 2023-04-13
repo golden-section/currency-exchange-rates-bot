@@ -1,17 +1,19 @@
 package org.teamthree.telegram;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
+import java.util.Properties;
+
 
 class BotTokenGetter {
     protected static String getToken() {
-        Scanner scanner;
+        Properties properties = new Properties();
+        FileInputStream token;
         try {
-            scanner = new Scanner(new File("src/main/java/org/teamthree/telegram/token_config.txt"));
-        } catch (FileNotFoundException e) {
+            token = new FileInputStream("application.properties");
+            properties.load(token);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return scanner.nextLine();
+        return properties.getProperty("botToken");
     }
 }

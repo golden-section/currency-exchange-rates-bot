@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BotCommands {
+
     SendMessage message = new SendMessage();
 
     SendMessage sendStartMenu(long chatId) {
@@ -19,10 +20,10 @@ public class BotCommands {
 
     SendMessage sendInfo(long chatId) {
         message.setChatId(chatId);
-        message.setText("""
-                Курс у Bank:  Currency
-                Купівля:  moneyBuy
-                Продаж: moneySell""");
+        message.setText("Курс у [Bank]: [Currency]\n" +
+                "Купівля: [moneyBuy]\n" +
+                "Продаж: [moneySell]");
+        startMenuButtons();
         return message;
     }
 
@@ -50,6 +51,7 @@ public class BotCommands {
     }
 
     private void startMenuButtons() {
+
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
@@ -57,11 +59,11 @@ public class BotCommands {
 
         InlineKeyboardButton buttonInfo = new InlineKeyboardButton();
         buttonInfo.setText("Отримати інфу");
-        buttonInfo.setCallbackData("button_info");
+        buttonInfo.setCallbackData(Buttons.BUTTON_INFO.getText());
 
         InlineKeyboardButton buttonSettings = new InlineKeyboardButton();
         buttonSettings.setText("Налаштування");
-        buttonSettings.setCallbackData("button_setting");
+        buttonSettings.setCallbackData(Buttons.BUTTON_SETTINGS.getText());
 
         keyboardButtonsRow1.add(buttonInfo);
         keyboardButtonsRow2.add(buttonSettings);
@@ -73,38 +75,47 @@ public class BotCommands {
     }
 
     private void settingMenuButtons() {
+
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow4 = new ArrayList<>();
+        List<InlineKeyboardButton> keyboardButtonsRow5 = new ArrayList<>();
 
         InlineKeyboardButton currencyRefactorButton = new InlineKeyboardButton();
         currencyRefactorButton.setText("К-ть знаків після коми");
-        currencyRefactorButton.setCallbackData("currency_refactor_button");
+        currencyRefactorButton.setCallbackData(Buttons.BUTTON_CURRENCY_REFACTOR.getText());
 
         InlineKeyboardButton bankChooserButton = new InlineKeyboardButton();
         bankChooserButton.setText("Банк");
-        bankChooserButton.setCallbackData("bank_chooser_button");
+        bankChooserButton.setCallbackData(Buttons.BUTTON_BANK_CHOOSER.getText());
 
         InlineKeyboardButton checkCurrencyButton = new InlineKeyboardButton();
         checkCurrencyButton.setText("Валюти");
-        checkCurrencyButton.setCallbackData("check_currency_button");
+        checkCurrencyButton.setCallbackData(Buttons.BUTTON_CURRENCY_CHECKER.getText());
 
         InlineKeyboardButton timeAlertButton = new InlineKeyboardButton();
         timeAlertButton.setText("Час сповіщення");
-        timeAlertButton.setCallbackData("time_alert_button");
+        timeAlertButton.setCallbackData(Buttons.BUTTON_ALERT_TIME.getText());
+
+        InlineKeyboardButton mainMenuButton = new InlineKeyboardButton();
+        mainMenuButton.setText("Головне меню");
+        mainMenuButton.setCallbackData(Buttons.BUTTON_INFO.getText());
+
 
         keyboardButtonsRow1.add(currencyRefactorButton);
         keyboardButtonsRow2.add(bankChooserButton);
         keyboardButtonsRow3.add(checkCurrencyButton);
         keyboardButtonsRow4.add(timeAlertButton);
+        keyboardButtonsRow5.add(mainMenuButton);
 
         rowList.add(keyboardButtonsRow1);
         rowList.add(keyboardButtonsRow2);
         rowList.add(keyboardButtonsRow3);
         rowList.add(keyboardButtonsRow4);
+        rowList.add(keyboardButtonsRow5);
 
         inlineKeyboardMarkup.setKeyboard(rowList);
         message.setReplyMarkup(inlineKeyboardMarkup);
