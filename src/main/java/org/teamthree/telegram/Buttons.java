@@ -12,6 +12,3 @@ enum Buttons {
     BUTTON_THREE_CURRENCY,
     BUTTON_FOUR_CURRENCY
 }
-
-
-

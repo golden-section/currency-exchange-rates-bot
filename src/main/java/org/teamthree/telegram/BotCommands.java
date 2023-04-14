@@ -3,8 +3,6 @@ package org.teamthree.telegram;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
-import static java.lang.Math.toIntExact;
-
 public class BotCommands {
     ButtonSetup buttonSetup = new ButtonSetup();
     SendMessage message = new SendMessage();
@@ -40,10 +38,10 @@ public class BotCommands {
         return message;
     }
 
-    EditMessageText refactorCurrency(long chatId, long messageId, int value) {
+    EditMessageText refactorCurrency(long chatId, int messageId, int value) {
         EditMessageText newMessage = new EditMessageText();
         newMessage.setChatId(chatId);
-        newMessage.setMessageId(toIntExact(messageId));
+        newMessage.setMessageId(messageId);
         newMessage.setText("Оберіть кількість знаків після коми:");
         newMessage.setReplyMarkup(buttonSetup.refactorCurrencyButtons(message, value));
 

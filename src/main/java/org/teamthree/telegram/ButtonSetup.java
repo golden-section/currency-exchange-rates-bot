@@ -12,7 +12,6 @@ public class ButtonSetup {
     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
     List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
-
     void settingMenuButtons(SendMessage message) {
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
@@ -40,7 +39,6 @@ public class ButtonSetup {
         InlineKeyboardButton mainMenuButton = new InlineKeyboardButton();
         mainMenuButton.setText("Головне меню");
         mainMenuButton.setCallbackData(Buttons.BUTTON_INFO.name());
-
 
         keyboardButtonsRow1.add(currencyRefactorButton);
         keyboardButtonsRow2.add(bankChooserButton);

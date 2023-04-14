@@ -32,7 +32,6 @@ class TelegramBot extends TelegramLongPollingBot {
             int messageId = update.getCallbackQuery().getMessage().getMessageId();
             Buttons callbackData = Buttons.valueOf(update.getCallbackQuery().getData());
 
-
             switch(callbackData) {
                 case BUTTON_INFO -> executeMessage(botCommands.sendInfo(chatId));
 
@@ -64,13 +63,7 @@ class TelegramBot extends TelegramLongPollingBot {
 
                 default -> System.out.println("Unknown command");
             }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
         }
-
     }
 
     void executeMessage(SendMessage message) {
