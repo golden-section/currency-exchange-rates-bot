@@ -1,22 +1,17 @@
 package org.teamthree.telegram;
 
 enum Buttons {
-    BUTTON_INFO("button_info"),
-    BUTTON_SETTINGS("button_settings"),
-    BUTTON_CURRENCY_REFACTOR("button_currency_refactor"),
-    BUTTON_BANK_CHOOSER("bank_chooser_button"),
-    BUTTON_CURRENCY_CHECKER("currency_checker_button"),
-    BUTTON_ALERT_TIME("alert_time_button");
+    BUTTON_INFO,
+    BUTTON_SETTINGS,
+    BUTTON_CURRENCY_REFACTOR,
+    BUTTON_BANK_CHOOSER,
+    BUTTON_CURRENCY_CHECKER,
+    BUTTON_ALERT_TIME,
 
-    private final String text;
-
-    Buttons(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
-        return text;
-    }
+    BUTTON_TWO_CURRENCY,
+    BUTTON_THREE_CURRENCY,
+    BUTTON_FOUR_CURRENCY
 }
+
 
 
