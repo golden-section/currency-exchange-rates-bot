@@ -24,30 +24,22 @@ public class CurrencyChooserCommand extends BotCommand {
         message.setText("Оберіть валюту");
         message.setChatId(chat.getId());
 
-        InlineKeyboardButton privatBankButton = InlineKeyboardButton
+        InlineKeyboardButton USDButton = InlineKeyboardButton
                 .builder()
                 .text("USD")
-                .callbackData(String.valueOf(BotButtons.SETTINGS_BUTTON))
+                .callbackData(String.valueOf(BotButtons.USD_BUTTON))
                 .build();
 
         InlineKeyboardButton monoBankButton = InlineKeyboardButton
                 .builder()
                 .text("EUR")
-                .callbackData(String.valueOf(BotButtons.BACK_BUTTON))
+                .callbackData(String.valueOf(BotButtons.EUR_BUTTON))
                 .build();
-
-        InlineKeyboardButton NBUButton = InlineKeyboardButton
-                .builder()
-                .text("RUB")
-                .callbackData(String.valueOf(BotButtons.BACK_BUTTON))
-                .build();
-
 
         InlineKeyboardMarkup keyboard = InlineKeyboardMarkup.builder()
                 .keyboard(Arrays.asList(
-                        Collections.singletonList(privatBankButton),
-                        Collections.singletonList(monoBankButton),
-                        Collections.singletonList(NBUButton)
+                        Collections.singletonList(USDButton),
+                        Collections.singletonList(monoBankButton)
                 ))
                 .build();
 

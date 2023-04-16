@@ -27,19 +27,19 @@ public class BankChooserCommand extends BotCommand {
         InlineKeyboardButton privatBankButton = InlineKeyboardButton
                 .builder()
                 .text("ПриватБанк")
-                .callbackData(String.valueOf(BotButtons.SETTINGS_BUTTON))
+                .callbackData(String.valueOf(BotButtons.PRIVAT_BANK_BUTTON))
                 .build();
 
         InlineKeyboardButton monoBankButton = InlineKeyboardButton
                 .builder()
                 .text("МоноБанк")
-                .callbackData(String.valueOf(BotButtons.BACK_BUTTON))
+                .callbackData(String.valueOf(BotButtons.MONO_BANK_BUTTON))
                 .build();
 
         InlineKeyboardButton NBUButton = InlineKeyboardButton
                 .builder()
                 .text("НБУ")
-                .callbackData(String.valueOf(BotButtons.BACK_BUTTON))
+                .callbackData(String.valueOf(BotButtons.NBU_BANK_BUTTON))
                 .build();
 
 

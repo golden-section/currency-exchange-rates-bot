@@ -12,7 +12,8 @@ public class TelegramBot extends TelegramLongPollingCommandBot {
                 new SettingsCommand(),
                 new RefactorCurrencyCommand(),
                 new BankChooserCommand(),
-                new CurrencyChooserCommand());
+                new CurrencyChooserCommand(),
+                new TimeAlertCommand());
     }
 
     @Override
