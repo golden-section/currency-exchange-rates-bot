@@ -1,0 +1,16 @@
+package org.teamthree.telegram;
+
+public enum BotButtons {
+    INFO_BUTTON,
+    SETTINGS_BUTTON,
+    REFACTOR_CURRENCY_BUTTON,
+    CHOOSE_BANK_BUTTON,
+    PICK_CURRENCY_BUTTON,
+    TIME_ALERT_BUTTON,
+    BACK_BUTTON,
+    TWO_BUTTON,
+    THREE_BUTTON,
+    FOUR_BUTTON
+}
+
+
