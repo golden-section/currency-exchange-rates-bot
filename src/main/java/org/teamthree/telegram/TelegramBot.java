@@ -12,12 +12,12 @@ import java.time.LocalTime;
 class TelegramBot extends TelegramLongPollingBot {
 
     TelegramBot() {
-        super(BotTokenGetter.getToken());
+        super(BotConstants.BOT_TOKEN);
     }
 
     @Override
     public String getBotUsername() {
-        return "currency_exchange_rates_tm3_bot";
+        return BotConstants.BOT_NAME;
     }
 
     @Override

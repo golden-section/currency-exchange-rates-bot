@@ -1,11 +1,11 @@
 package org.teamthree;
 
-import org.teamthree.telegram.TelegramBotService;
-
+import org.teamthree.telegram.BotRegister;
 
 public class AppLauncher {
     public static void main(String[] args) {
-        new TelegramBotService();
+        BotRegister botRegister = new BotRegister();
+        botRegister.register();
         System.out.println("Running!");
     }
 }
