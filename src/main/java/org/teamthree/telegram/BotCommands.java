@@ -48,15 +48,43 @@ public class BotCommands {
         return newMessage;
     }
 
-    SendMessage chooseBank() {
-        return null;
+    SendMessage defaultChooseBank(long chatId, int value) {
+        message.setChatId(chatId);
+        message.setText("Оберіть банк для використання:");
+        buttonSetup.bankPickerButtons(message, value);
+        return message;
     }
 
-    SendMessage currencyChecker() {
-        return null;
+    EditMessageText chooseBank(long chatId, int messageId, int value) {
+        EditMessageText newMessage = new EditMessageText();
+        newMessage.setChatId(chatId);
+        newMessage.setMessageId(messageId);
+        newMessage.setText("Оберіть банк для використання:");
+        newMessage.setReplyMarkup(buttonSetup.bankPickerButtons(message, value));
+
+        return newMessage;
     }
 
-    SendMessage timeAlert() {
-        return null;
+    SendMessage defaultCurrencyPicker(long chatId, int value) {
+        message.setChatId(chatId);
+        message.setText("Оберіть валюту:");
+        buttonSetup.currencyPickButton(message, value);
+        return message;
+    }
+
+    EditMessageText currencyPicker(long chatId, int messageId, int value) {
+        EditMessageText newMessage = new EditMessageText();
+        newMessage.setChatId(chatId);
+        newMessage.setMessageId(messageId);
+        newMessage.setText("Оберіть валюту:");
+        newMessage.setReplyMarkup(buttonSetup.currencyPickButton(message, value));
+
+        return newMessage;
+    }
+
+    SendMessage timeAlert(long chatId) {
+        message.setChatId(chatId);
+        message.setText("Напишіть час time_(від 0-23) на який хочете щоб приходили повідомлення:");
+        return message;
     }
 }
