@@ -1,7 +1,11 @@
 package org.teamthree;
 
+import org.teamthree.telegram.BotRegister;
+
 public class AppLauncher {
     public static void main(String[] args) {
-        System.out.println("Test run");
+        BotRegister botRegister = new BotRegister();
+        botRegister.register();
+        System.out.println("Running!");
     }
 }
