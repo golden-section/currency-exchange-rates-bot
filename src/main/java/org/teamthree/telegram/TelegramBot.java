@@ -7,8 +7,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.time.LocalTime;
-
 class TelegramBot extends TelegramLongPollingBot {
 
     TelegramBot() {
@@ -29,23 +27,6 @@ class TelegramBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             String text = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
-            if (text.startsWith("time_")) {
-                String hourString = text.substring(5);
-                try {
-                    int hour = Integer.parseInt(hourString);
-                    if (hour >= 0 && hour <= 23) {
-                        LocalTime time = LocalTime.of(hour, 0);
-                        timeAlert.scheduleMessage(chatId, time);
-                    } else {
-                        throw new NumberFormatException();
-                    }
-                } catch (NumberFormatException e) {
-                    SendMessage newMessage = new SendMessage();
-                    newMessage.setChatId(chatId);
-                    newMessage.setText("Будь ласка використовуйте формат 0-23");
-                    executeMessage(newMessage);
-                }
-            }
             if (message.getText().equals("/start")) {
                 executeMessage(botCommands.sendStartMenu(chatId));
             }
