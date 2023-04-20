@@ -3,6 +3,7 @@ package org.teamthree.banks.privatbank;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Jsoup;
+import org.teamthree.banks.Currency;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -12,11 +13,11 @@ import java.util.List;
 
 public class PrivatBankCurrencyService implements CurrencyService{
     private final String url = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5";
-    private final String urlPLZ = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=4";
+    private final String urlGBP = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=4";
     @Override
     public BigDecimal getPurchaseRate(Currency currency) throws IOException {
         String response = Jsoup
-                .connect(urlPLZ)
+                .connect(urlGBP)
                 .ignoreContentType(true)
                 .get()
                 .body()
@@ -39,7 +40,7 @@ public class PrivatBankCurrencyService implements CurrencyService{
         for (CurrencyItem currencyItem : currencyItems) {
             if (currencyItem.getCcy() != null &&(currencyItem.getCcy().equals(Currency.USD) ||
                     currencyItem.getCcy().equals(Currency.EUR) ||
-                    currencyItem.getCcy().equals(Currency.PLZ))) {
+                    currencyItem.getCcy().equals(Currency.GBP))) {
                 filteredCurrencyItems.add(currencyItem);
             }
         }
@@ -55,7 +56,7 @@ public class PrivatBankCurrencyService implements CurrencyService{
     @Override
     public BigDecimal getSalesRate(Currency currency) throws IOException{
         String response = Jsoup
-                .connect(urlPLZ)
+                .connect(urlGBP)
                 .ignoreContentType(true)
                 .get()
                 .body()
@@ -78,7 +79,7 @@ public class PrivatBankCurrencyService implements CurrencyService{
         for (CurrencyItem currencyItem : currencyItems) {
             if (currencyItem.getCcy() != null &&(currencyItem.getCcy().equals(Currency.USD) ||
                     currencyItem.getCcy().equals(Currency.EUR) ||
-                    currencyItem.getCcy().equals(Currency.PLZ))) {
+                    currencyItem.getCcy().equals(Currency.GBP))) {
                 filteredCurrencyItems.add(currencyItem);
             }
         }

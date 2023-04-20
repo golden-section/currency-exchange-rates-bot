@@ -1,16 +1,16 @@
 package org.teamthree.telegram;
 
+import org.teamthree.banks.Currency;
+import org.teamthree.utils.Banks;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ButtonSetup {
-    static int lastValueOfCurrencyPicker = 1;
     static int lastValueOfCurrencyRefactor = 2;
-    static int lastValueOfBankPicker = 1;
     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
     List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
@@ -126,33 +126,30 @@ public class ButtonSetup {
         message.setReplyMarkup(inlineKeyboardMarkup);
     }
 
-    InlineKeyboardMarkup bankPickerButtons(SendMessage message, int valueCurrency) {
+    InlineKeyboardMarkup bankPickerButtons(SendMessage message, Banks bank) {
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow4 = new ArrayList<>();
         InlineKeyboardButton privatBankButton = new InlineKeyboardButton();
-        if (valueCurrency == 1) {
+        if (bank.equals(Banks.PRIVATBANK)) {
             privatBankButton.setText("✓ Приватбанк");
-            lastValueOfBankPicker = 1;
         } else {
             privatBankButton.setText("Приватбанк");
         }
         privatBankButton.setCallbackData(Buttons.BUTTON_PRIVAT_BANK.name());
 
         InlineKeyboardButton monoBankButton = new InlineKeyboardButton();
-        if (valueCurrency == 2) {
+        if (bank.equals(Banks.MONOBANK)) {
             monoBankButton.setText("✓ Монобанк");
-            lastValueOfBankPicker = 2;
         } else {
             monoBankButton.setText("Монобанк");
         }
         monoBankButton.setCallbackData(Buttons.BUTTON_MONO_BANK.name());
 
         InlineKeyboardButton NBUBankButton = new InlineKeyboardButton();
-        if (valueCurrency == 3) {
+        if (bank.equals(Banks.NBU)) {
             NBUBankButton.setText("✓ НБУ");
-            lastValueOfBankPicker = 3;
         } else {
             NBUBankButton.setText("НБУ");
         }
@@ -175,28 +172,35 @@ public class ButtonSetup {
         return inlineKeyboardMarkup;
     }
 
-    InlineKeyboardMarkup currencyPickButton(SendMessage message, int valueCurrency) {
+    InlineKeyboardMarkup currencyPickButton(SendMessage message, HashSet<Currency> currency) {
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList<>();
+        List<InlineKeyboardButton> keyboardButtonsRow4 = new ArrayList<>();
 
         InlineKeyboardButton USDButton = new InlineKeyboardButton();
-        if (valueCurrency == 1) {
+        if (currency.contains(Currency.USD)) {
             USDButton.setText("✓ USD");
-            lastValueOfCurrencyRefactor = 2;
-        } else {
+        } else
             USDButton.setText("USD");
-        }
+
         USDButton.setCallbackData(Buttons.BUTTON_USD.name());
 
         InlineKeyboardButton EURButton = new InlineKeyboardButton();
-        if (valueCurrency == 2) {
+        if (currency.contains(Currency.EUR)) {
             EURButton.setText("✓ EUR");
-            lastValueOfBankPicker = 2;
-        } else {
+        } else
             EURButton.setText("EUR");
-        }
+
         EURButton.setCallbackData(Buttons.BUTTON_EUR.name());
+
+        InlineKeyboardButton GBPButton = new InlineKeyboardButton();
+        if (currency.contains(Currency.GBP)) {
+            GBPButton.setText("✓ GBP");
+        } else
+            GBPButton.setText("GBP");
+
+        GBPButton.setCallbackData(Buttons.BUTTON_GBP.name());
 
 
         InlineKeyboardButton mainMenuButton = new InlineKeyboardButton();
@@ -205,10 +209,12 @@ public class ButtonSetup {
 
         keyboardButtonsRow1.add(USDButton);
         keyboardButtonsRow2.add(EURButton);
-        keyboardButtonsRow3.add(mainMenuButton);
+        keyboardButtonsRow3.add(GBPButton);
+        keyboardButtonsRow4.add(mainMenuButton);
         rowList.add(keyboardButtonsRow1);
         rowList.add(keyboardButtonsRow2);
         rowList.add(keyboardButtonsRow3);
+        rowList.add(keyboardButtonsRow4);
 
         inlineKeyboardMarkup.setKeyboard(rowList);
         message.setReplyMarkup(inlineKeyboardMarkup);

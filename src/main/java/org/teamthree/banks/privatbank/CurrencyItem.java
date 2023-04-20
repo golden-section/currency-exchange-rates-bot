@@ -1,6 +1,7 @@
 package org.teamthree.banks.privatbank;
 
 import lombok.Data;
+import org.teamthree.banks.Currency;
 
 import java.math.BigDecimal;
 

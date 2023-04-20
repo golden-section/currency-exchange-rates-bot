@@ -3,15 +3,14 @@ package org.teamthree.banks.monobank;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Jsoup;
-
+import org.teamthree.banks.Currency;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static org.teamthree.banks.monobank.Currency.*;
+import static org.teamthree.banks.Currency.*;
 
 public class MonobankCurrencyRateService implements CurrencyRateApiService {
 
@@ -68,7 +67,7 @@ public class MonobankCurrencyRateService implements CurrencyRateApiService {
                 980, UAH,
                 840, USD,
                 978, EUR,
-                985, PLN
+                826, GBP
         );
         return currencyItems.stream()
                 .peek(item -> {

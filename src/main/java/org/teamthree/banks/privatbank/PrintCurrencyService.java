@@ -1,8 +1,9 @@
 package org.teamthree.banks.privatbank;
 
+import org.teamthree.banks.Currency;
+
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class PrintCurrencyService {
     CurrencyService currencyService = new PrivatBankCurrencyService();
@@ -23,14 +24,5 @@ public class PrintCurrencyService {
             throw new RuntimeException(e);
         }
         return purchaseRate;
-    }
-    public String convert(BigDecimal salesRate, BigDecimal purchaseRate, Currency currency){
-        String templateOfMessage = "Purchase rate UAH => ${currency} = ${purchaseRate}\nSales rate ${currency} => UAH = ${salesRate}";
-        BigDecimal roundedRate = salesRate.setScale(2, RoundingMode.HALF_UP);
-        BigDecimal roundedRate2 = purchaseRate.setScale(2, RoundingMode.HALF_UP);
-        return templateOfMessage
-                .replace("${currency}", currency.name())
-                .replace("${salesRate}",roundedRate +"")
-                .replace("${purchaseRate}", roundedRate2 +"");
     }
 }
