@@ -1,7 +1,7 @@
 package org.teamthree.banks.monobank;
 
 import lombok.Data;
-
+import org.teamthree.banks.Currency;
 import java.math.BigDecimal;
 
 @Data

@@ -1,5 +1,7 @@
 package org.teamthree.banks.privatbank;
 
+import org.teamthree.banks.Currency;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 

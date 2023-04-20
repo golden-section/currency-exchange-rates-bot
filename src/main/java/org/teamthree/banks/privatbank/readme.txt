@@ -1,1 +1,0 @@
-Place Privatbank API integration classes in this package

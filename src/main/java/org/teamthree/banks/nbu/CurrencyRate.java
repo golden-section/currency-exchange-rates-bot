@@ -1,7 +1,6 @@
 package org.teamthree.banks.nbu;
 
 import lombok.Data;
-
 import java.math.BigDecimal;
 
 @Data

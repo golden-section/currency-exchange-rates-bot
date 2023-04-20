@@ -2,6 +2,7 @@ package org.teamthree.banks.monobank;
 
 import java.math.BigDecimal;
 import java.util.List;
+import org.teamthree.banks.Currency;
 
 public interface CurrencyRateApiService {
 

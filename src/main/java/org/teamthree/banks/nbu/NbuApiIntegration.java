@@ -3,7 +3,7 @@ package org.teamthree.banks.nbu;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Jsoup;
-
+import org.teamthree.banks.Currency;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
