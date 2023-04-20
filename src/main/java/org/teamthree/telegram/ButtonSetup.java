@@ -194,13 +194,13 @@ public class ButtonSetup {
 
         EURButton.setCallbackData(Buttons.BUTTON_EUR.name());
 
-        InlineKeyboardButton PLNButton = new InlineKeyboardButton();
+        InlineKeyboardButton GBPButton = new InlineKeyboardButton();
         if (currency.contains(Currency.GBP)) {
-            PLNButton.setText("✓ GBP");
+            GBPButton.setText("✓ GBP");
         } else
-            PLNButton.setText("GBP");
+            GBPButton.setText("GBP");
 
-        PLNButton.setCallbackData(Buttons.BUTTON_GBP.name());
+        GBPButton.setCallbackData(Buttons.BUTTON_GBP.name());
 
 
         InlineKeyboardButton mainMenuButton = new InlineKeyboardButton();
@@ -209,7 +209,7 @@ public class ButtonSetup {
 
         keyboardButtonsRow1.add(USDButton);
         keyboardButtonsRow2.add(EURButton);
-        keyboardButtonsRow3.add(PLNButton);
+        keyboardButtonsRow3.add(GBPButton);
         keyboardButtonsRow4.add(mainMenuButton);
         rowList.add(keyboardButtonsRow1);
         rowList.add(keyboardButtonsRow2);
