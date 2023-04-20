@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Jsoup;
 import org.teamthree.banks.Currency;
+import org.teamthree.banks.CurrencyItem;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -18,10 +19,10 @@ public class NbuApiIntegration {
             String json = Jsoup.connect(NBU_API_URL).ignoreContentType(true).execute().body();
 
             Gson gson = new Gson();
-            Type listType = new TypeToken<List<CurrencyRate>>(){}.getType();
-            List<CurrencyRate> currencyRates = gson.fromJson(json, listType);
+            Type listType = new TypeToken<List<CurrencyItem>>(){}.getType();
+            List<CurrencyItem> currencyRates = gson.fromJson(json, listType);
 
-            for (CurrencyRate rate : currencyRates) {
+            for (CurrencyItem rate : currencyRates) {
                 if (rate.getCc().equalsIgnoreCase(currency.name())) {
                     return rate.getRate();
                 }

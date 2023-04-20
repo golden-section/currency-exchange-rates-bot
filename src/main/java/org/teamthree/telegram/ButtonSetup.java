@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ButtonSetup {
-    static int lastValueOfCurrencyRefactor = 2;
     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
     List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
 
@@ -19,10 +18,9 @@ public class ButtonSetup {
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow3 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow4 = new ArrayList<>();
-        List<InlineKeyboardButton> keyboardButtonsRow5 = new ArrayList<>();
 
         InlineKeyboardButton currencyRefactorButton = new InlineKeyboardButton();
-        currencyRefactorButton.setText("К-ть знаків після коми");
+        currencyRefactorButton.setText("Кількість знаків після коми");
         currencyRefactorButton.setCallbackData(Buttons.BUTTON_CURRENCY_REFACTOR.name());
 
         InlineKeyboardButton bankChooserButton = new InlineKeyboardButton();
@@ -33,10 +31,6 @@ public class ButtonSetup {
         checkCurrencyButton.setText("Валюти");
         checkCurrencyButton.setCallbackData(Buttons.BUTTON_CURRENCY_CHECKER.name());
 
-        InlineKeyboardButton timeAlertButton = new InlineKeyboardButton();
-        timeAlertButton.setText("Час сповіщення");
-        timeAlertButton.setCallbackData(Buttons.BUTTON_ALERT_TIME.name());
-
         InlineKeyboardButton mainMenuButton = new InlineKeyboardButton();
         mainMenuButton.setText("Головне меню");
         mainMenuButton.setCallbackData(Buttons.BUTTON_INFO.name());
@@ -44,14 +38,12 @@ public class ButtonSetup {
         keyboardButtonsRow1.add(currencyRefactorButton);
         keyboardButtonsRow2.add(bankChooserButton);
         keyboardButtonsRow3.add(checkCurrencyButton);
-        keyboardButtonsRow4.add(timeAlertButton);
-        keyboardButtonsRow5.add(mainMenuButton);
+        keyboardButtonsRow4.add(mainMenuButton);
 
         rowList.add(keyboardButtonsRow1);
         rowList.add(keyboardButtonsRow2);
         rowList.add(keyboardButtonsRow3);
         rowList.add(keyboardButtonsRow4);
-        rowList.add(keyboardButtonsRow5);
 
         inlineKeyboardMarkup.setKeyboard(rowList);
         message.setReplyMarkup(inlineKeyboardMarkup);
@@ -65,7 +57,6 @@ public class ButtonSetup {
         InlineKeyboardButton two_button = new InlineKeyboardButton();
         if (valueCurrency == 2) {
             two_button.setText("✓ 2");
-            lastValueOfCurrencyRefactor = 2;
         } else {
             two_button.setText("2");
         }
@@ -74,7 +65,6 @@ public class ButtonSetup {
         InlineKeyboardButton three_button = new InlineKeyboardButton();
         if (valueCurrency == 3) {
             three_button.setText("✓ 3");
-            lastValueOfCurrencyRefactor = 3;
         } else {
             three_button.setText("3");
         }
@@ -83,7 +73,6 @@ public class ButtonSetup {
         InlineKeyboardButton four_button = new InlineKeyboardButton();
         if (valueCurrency == 4) {
             four_button.setText("✓ 4");
-            lastValueOfCurrencyRefactor = 4;
         } else {
             four_button.setText("4");
         }
@@ -110,7 +99,7 @@ public class ButtonSetup {
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
         InlineKeyboardButton buttonInfo = new InlineKeyboardButton();
-        buttonInfo.setText("Отримати інфу");
+        buttonInfo.setText("Отримати інфо");
         buttonInfo.setCallbackData(Buttons.BUTTON_INFO.name());
 
         InlineKeyboardButton buttonSettings = new InlineKeyboardButton();
