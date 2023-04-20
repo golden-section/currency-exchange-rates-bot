@@ -7,7 +7,6 @@ import org.jsoup.Jsoup;
 import org.teamthree.banks.Currency;
 import org.teamthree.banks.CurrencyItem;
 import org.teamthree.banks.CurrencyRateService;
-
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
