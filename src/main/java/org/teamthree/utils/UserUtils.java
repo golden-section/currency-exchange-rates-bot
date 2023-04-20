@@ -15,7 +15,6 @@ public class UserUtils {
     }
 
     public static boolean isUserExists(long chatId) {
-        System.out.println("usersMap.containsKey(chatID) = " + usersMap.containsKey(chatId));
         return usersMap.containsKey(chatId);
     }
 

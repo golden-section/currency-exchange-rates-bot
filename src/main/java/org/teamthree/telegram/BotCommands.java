@@ -9,11 +9,9 @@ import org.teamthree.utils.UserSettings;
 import org.teamthree.utils.UserUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashSet;
-import java.util.Objects;
 
 public class BotCommands {
     ButtonSetup buttonSetup = new ButtonSetup();
@@ -52,8 +50,8 @@ public class BotCommands {
 
         if(bank.equals(Banks.NBU)) {
             for(Currency currency : currencies) {
-                BigDecimal sell = Objects.requireNonNull(NbuApiIntegration.getCurrentRate(currency)).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
-                BigDecimal buy = Objects.requireNonNull(NbuApiIntegration.getCurrentRate(currency)).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                BigDecimal sell = NbuApiIntegration.getCurrentRate(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                BigDecimal buy = NbuApiIntegration.getCurrentRate(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
                 result.append("Купівля: ").append(currency.getCurrencyName()).append(": ").append(sell).append("\n");
                 result.append("Продаж: ").append(currency.getCurrencyName()).append(": ").append(buy).append("\n");
             }
