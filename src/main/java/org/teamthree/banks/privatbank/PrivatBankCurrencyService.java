@@ -2,20 +2,23 @@ package org.teamthree.banks.privatbank;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.teamthree.banks.Currency;
+import org.teamthree.banks.CurrencyItem;
+import org.teamthree.banks.CurrencyRateService;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrivatBankCurrencyService implements CurrencyService{
+public class PrivatBankCurrencyService implements CurrencyRateService {
     private final String url = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5";
     private final String urlGBP = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=4";
+    @SneakyThrows
     @Override
-    public BigDecimal getPurchaseRate(Currency currency) throws IOException {
+    public BigDecimal getRateBuy(Currency currency) {
         String response = Jsoup
                 .connect(urlGBP)
                 .ignoreContentType(true)
@@ -53,8 +56,9 @@ public class PrivatBankCurrencyService implements CurrencyService{
                 .findFirst()
                 .orElseThrow();
     }
+    @SneakyThrows
     @Override
-    public BigDecimal getSalesRate(Currency currency) throws IOException{
+    public BigDecimal getRateSell(Currency currency) {
         String response = Jsoup
                 .connect(urlGBP)
                 .ignoreContentType(true)

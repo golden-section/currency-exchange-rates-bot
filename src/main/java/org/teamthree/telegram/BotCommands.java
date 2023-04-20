@@ -1,19 +1,19 @@
 package org.teamthree.telegram;
 
-import org.teamthree.banks.monobank.CurrencyItem;
+import org.teamthree.banks.Currency;
 import org.teamthree.banks.monobank.MonobankCurrencyRateService;
 import org.teamthree.banks.nbu.NbuApiIntegration;
-import org.teamthree.banks.privatbank.PrintCurrencyService;
+import org.teamthree.banks.privatbank.PrivatBankCurrencyService;
 import org.teamthree.utils.Banks;
 import org.teamthree.utils.UserSettings;
 import org.teamthree.utils.UserUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.teamthree.banks.Currency;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 
 public class BotCommands {
     ButtonSetup buttonSetup = new ButtonSetup();
@@ -30,8 +30,7 @@ public class BotCommands {
         UserSettings userSettings = UserUtils.getUser(chatId).getUserSettings();
         Banks bank = userSettings.getBank();
         HashSet<Currency> currencies = userSettings.getCurrency();
-        int symbolsAfterDot = userSettings.getSymbolsAfterDot();
-        int notificationTime = userSettings.getNotificationTime();
+        byte symbolsAfterDot = userSettings.getSymbolsAfterDot();
         StringBuilder result = new StringBuilder();
 
         result.append("Курс в ").append(bank.getBankName()).append("\n");
@@ -42,10 +41,10 @@ public class BotCommands {
         }
 
         if(bank.equals(Banks.PRIVATBANK)) {
-            PrintCurrencyService printCurrencyService = new PrintCurrencyService();
+            PrivatBankCurrencyService privatbank = new PrivatBankCurrencyService();
             for(Currency currency : currencies) {
-                BigDecimal sell = printCurrencyService.salesRates(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
-                BigDecimal buy = printCurrencyService.purchaseRates(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                BigDecimal sell = privatbank.getRateSell(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                BigDecimal buy = privatbank.getRateBuy(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
                 result.append("Купівля: ").append(currency.getCurrencyName()).append(": ").append(sell).append("\n");
                 result.append("Продаж: ").append(currency.getCurrencyName()).append(": ").append(buy).append("\n");
             }
@@ -53,17 +52,18 @@ public class BotCommands {
 
         if(bank.equals(Banks.NBU)) {
             for(Currency currency : currencies) {
-                BigDecimal rate = NbuApiIntegration.getCurrentRate(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
-                result.append("Купівля/Продаж: ").append(currency.getCurrencyName()).append(": ").append(rate).append("\n");
+                BigDecimal sell = Objects.requireNonNull(NbuApiIntegration.getCurrentRate(currency)).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                BigDecimal buy = Objects.requireNonNull(NbuApiIntegration.getCurrentRate(currency)).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                result.append("Купівля: ").append(currency.getCurrencyName()).append(": ").append(sell).append("\n");
+                result.append("Продаж: ").append(currency.getCurrencyName()).append(": ").append(buy).append("\n");
             }
         }
 
         if(bank.equals(Banks.MONOBANK)) {
             MonobankCurrencyRateService mono = new MonobankCurrencyRateService();
-            List<CurrencyItem> rates = mono.getRates();
             for(Currency currency : currencies) {
-                BigDecimal sell = mono.rateSell(rates, currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
-                BigDecimal buy = mono.rateBuy(rates, currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                BigDecimal sell = mono.getRateSell(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
+                BigDecimal buy = mono.getRateBuy(currency).setScale(symbolsAfterDot, RoundingMode.HALF_UP);
                 result.append("Купівля: ").append(currency.getCurrencyName()).append(": ").append(sell).append("\n");
                 result.append("Продаж: ").append(currency.getCurrencyName()).append(": ").append(buy).append("\n");
             }
@@ -131,11 +131,5 @@ public class BotCommands {
         newMessage.setReplyMarkup(buttonSetup.currencyPickButton(message, currency));
 
         return newMessage;
-    }
-
-    SendMessage timeAlert(long chatId) {
-        message.setChatId(chatId);
-        message.setText("Напишіть час time_(від 0-23) на який хочете щоб приходили повідомлення:");
-        return message;
     }
 }
